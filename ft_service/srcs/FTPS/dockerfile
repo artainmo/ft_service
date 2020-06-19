@@ -1,0 +1,9 @@
+FROM alpine
+
+#get FTPD (FTP deamon)
+RUN apk add pure-ftpd --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
+#Use the alpine package with the --repository and constant alpine link
+
+EXPOSE 21
+
+CMD pure-ftpd -p 21:21
