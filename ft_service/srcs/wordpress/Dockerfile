@@ -1,14 +1,11 @@
 FROM alpine
 
-#Installing sql
-RUN apk add mysql mysql-client
-#Installing downloading other
-RUN apk add wget tar nginx
 
 #Get wordpress through zip
 RUN wget https://wordpress.org/latest.tar.gz
 #x for extract archive, v verbal display info, f use archive file
 RUN tar -xvf latest.tar.gz
+RUN rm latest.tar.gz
 RUN mkdir /www
 RUN mv wordpress/* /www
 RUN mkdir -p /run/wordpress
