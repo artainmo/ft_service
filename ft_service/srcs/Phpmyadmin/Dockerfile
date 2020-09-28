@@ -4,9 +4,9 @@ FROM alpine
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
 RUN tar -xvf phpMyAdmin-4.9.0.1-all-languages.tar.gz
 RUN rm phpMyAdmin-4.9.0.1-all-languages.tar.gz
-RUN mkdir /www
+RUN mkdir -p /www
 RUN mv phpMyAdmin-4.9.0.1-all-languages/* /www
-RUN mkdir -p /run/phpMyadmin
+RUN mkdir -p /run/phpMyadmin #???!!!
 
 EXPOSE 5000
 

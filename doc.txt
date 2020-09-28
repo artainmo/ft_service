@@ -1,0 +1,11 @@
+https://kubernetes.io/docs/tutorials/kubernetes-basics/
+
+https://medium.com/@shoaib_masood/metallb-network-loadbalancer-minikube-335d846dfdbe
+
+https://medium.com/faun/metallb-configuration-in-minikube-to-enable-kubernetes-service-of-type-loadbalancer-9559739787df
+
+Docker:
+Brew install docker
+Brew install docker-machine
+Install virtual box
+Script
