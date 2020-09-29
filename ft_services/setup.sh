@@ -4,7 +4,7 @@ brew install minikube
 
 #Run minikube on the host instead of one a VM, use --driver=none, now a cluster has been created
 minikube start --driver=none
-#Test if everythin is working
+#Test if everything is working
 #To clear minikube local state use minikube delete and to stop the cluster minikube stop
 minikube status
 
