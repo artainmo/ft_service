@@ -9,41 +9,35 @@ minikube start --driver=none
 minikube status
 
 
-
 #nginx
-docker build --tag nginx_image .
-kubectl create nginx --image=nginx_image
-kubectl expose nginx --type=loadbalancer --port=80 --port=443
+docker build --tag nginx_ srcs/nginx #Create image with dockerfile
+kubectl create -f srcs/nginx/nginx.YAML #Create pods with YALM files
 
 
 #worpdpress
-docker build
-kubectl create
+docker build --tag wordpress_ srcs/wordpress
+kubectl create -f srcs/wordpress/wordpress.YAML
 
 
 #influxdb
-docker build
-kubectl create
+docker build --tag influxdb_ srcs/influxdb
+kubectl create -f srcs/influxdb/influxdb.YALM
 
 
 #phpmyadmin
-docker build
-kubectl create
+docker build --tag phpmyadmin_ srcs/phpmyadmin
+kubectl create -f srcs/phpmyadmin/phpmyadmin.YALM
 
 
 #FTPS
-docker build
-kubectl create
+docker build --tag ftps_ srcs/ftps
+kubectl create -f srcs/ftps/ftps.YALM
 
 
 #Grafana
-docker build
-kubectl create
+docker build --tag srcs/grafana
+kubectl create -f srcs/grafana/grafana.YALM
 
-
-#Load balancer
-docker build
-kubectl create
 
 
 #Launch the online kubernetes platform
