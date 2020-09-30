@@ -1,0 +1,42 @@
+---
+
+#Templated service configuration file
+apiVersion: v1
+kind: Service
+  metadata:
+    name: wordpress-service
+      labels:
+        app: wordpress
+  spec:
+    type: LoadBalancer
+    selector:
+      app: wordpress
+    ports:
+      - port: 5050
+        name: http
+      #targetport -> targetport is what the service will listen to, while simply port is what other services can connect to
+
+---
+
+#Templated deployment configuration file
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-deployment
+  spec:
+  selector:
+    matchLabels:
+      app: wordpress
+    replicas: 1
+    template:
+      metadata:
+        labels:
+          app: wordpress
+      spec:
+        containers:
+          - name: wordpress
+            image: wordpress
+            imagePullPolicy: Never
+        ports:
+          - port: 5050
+            name: http

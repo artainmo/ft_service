@@ -1,6 +1,7 @@
 #Installing kubectl for the master node commands and minikub to run the cluster on it
 brew install kubectl
 brew install minikube
+brew install telegraf
 
 #Run minikube on the host instead of one a VM, use --driver=none, now a cluster has been created
 minikube start --driver=none
@@ -8,37 +9,53 @@ minikube start --driver=none
 #To clear minikube local state use minikube delete and to stop the cluster minikube stop
 minikube status
 
+#Take the external IP of minikube
+IP=$(minikube ip)
+#Link your shell with minikube, so it has access to locally created images
+eval $(minikube docker-env)
+
+#install metallb for load balancer, on cluster under metallb-system
+#kubectl create -f https://raw.githubusercontent.com/google/metallb/v0.8.1/manifests/metallb.yaml
+#Launch metallb with metallb yalm file
+#kubectl create -f metallb-system/metallb.yalm
+
+#Install metallb for load blanacer
+minikube addons configure metallb
+#Set load balancer start ip
+echo $IP
+#Set load balancer end ip
+echo $IP
 
 #nginx
-docker build --tag nginx_ srcs/nginx #Create image with dockerfile
-kubectl create -f srcs/nginx/nginx.YAML #Create pods with YALM files
+docker build --tag nginx srcs/nginx #Create image with dockerfile
+kubectl create -f srcs/nginx/nginx.yalm #Create pods with YALM files (images are called in YALM file)
 
 
 #worpdpress
-docker build --tag wordpress_ srcs/wordpress
-kubectl create -f srcs/wordpress/wordpress.YAML
+docker build --tag wordpress srcs/wordpress
+kubectl create -f srcs/wordpress/wordpress.yalm
 
 
 #influxdb
-docker build --tag influxdb_ srcs/influxdb
-kubectl create -f srcs/influxdb/influxdb.YALM
+docker build --tag influxdb srcs/influxdb
+kubectl create -f srcs/influxdb/influxdb.yalm
 
 
 #phpmyadmin
-docker build --tag phpmyadmin_ srcs/phpmyadmin
-kubectl create -f srcs/phpmyadmin/phpmyadmin.YALM
+docker build --tag phpmyadmin srcs/phpmyadmin
+kubectl create -f srcs/phpmyadmin/phpmyadmin.yalm
 
 
 #FTPS
-docker build --tag ftps_ srcs/ftps
-kubectl create -f srcs/ftps/ftps.YALM
+docker build --tag ftps srcs/ftps
+kubectl create -f srcs/ftps/ftps.yalm
 
 
 #Grafana
 docker build --tag srcs/grafana
-kubectl create -f srcs/grafana/grafana.YALM
-
-
+kubectl create -f srcs/grafana/grafana.yalm
 
 #Launch the online kubernetes platform
 Minikube dashboard
+
+open http://$IP

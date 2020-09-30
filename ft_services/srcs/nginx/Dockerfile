@@ -1,16 +1,16 @@
 FROM alpine
 
-RUN apk update && apk add openssl && apk add nginx
+RUN apk update && apk add openssl && apk add nginx && apk add openssh
 #apk -> Alpine Linux package manager, add -> Add new packages or upgrade packages to the running system
-
-RUN adduser -D www
-#Creation of user linked with nginx.conf (-D??Directory?)
 
 RUN mkdir /www
 COPY index.html /www
 #Sets the home page
 RUN mkdir -p /run/nginx
 #-p Creates necessary intermediate directories, gives all the permissions and shows no error if the directory already exist
+
+RUN adduser -D www
+#Creation of user linked with nginx.conf (-D??Directory?)
 
 RUN rm /etc/nginx/nginx.conf #Deleting the default and putting own
 COPY nginx.conf	/etc/nginx/
@@ -20,7 +20,6 @@ RUN mkdir /etc/nginx/ssl \
 
 EXPOSE 80 443
 #Expose the ports, 80 is in http and redirects through 301 to 443. 443 is in https (https is encrypted using ssl while http is not) !!!!
-
 
 RUN nginx -t
 #Test if everything functions correctly

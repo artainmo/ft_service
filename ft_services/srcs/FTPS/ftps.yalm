@@ -4,15 +4,15 @@
 apiVersion: v1
 kind: Service
   metadata:
-    name: mysql-service
+    name: ftps-service
       labels:
-        app: mysql
+        app: ftps
   spec:
-    type: ClusterIP
+    type: LoadBalancer
     selector:
-      app: mysql
+      app: ftps
     ports:
-      - port: 3306
+      - port: 21
         name: http
       #targetport -> targetport is what the service will listen to, while simply port is what other services can connect to
 
@@ -22,21 +22,21 @@ kind: Service
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-deployment
+  name: ftps-deployment
   spec:
   selector:
     matchLabels:
-      app: mysql
+      app: ftps
     replicas: 1
     template:
       metadata:
         labels:
-          app: mysql
+          app: ftps
       spec:
         containers:
-          - name: mysql
-            image: mysql
+          - name: ftps
+            image: ftps
             imagePullPolicy: Never
         ports:
-          - port: 3306
+          - port: 21
             name: http
