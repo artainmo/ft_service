@@ -9,8 +9,9 @@ minikube start --driver=none
 #To clear minikube local state use minikube delete and to stop the cluster minikube stop
 minikube status
 
-#Take the external IP of minikube
+#Take the external IP of minikube and save it in an external file for it to be accessible for containers
 IP=$(minikube ip)
+$IP > srcs/ip.txt
 #Link your shell with minikube, so it has access to locally created images
 eval $(minikube docker-env)
 
@@ -48,7 +49,7 @@ kubectl create -f srcs/phpmyadmin/phpmyadmin.yalm
 
 #FTPS
 docker build --tag ftps srcs/ftps
-kubectl create -f srcs/ftps/ftps.yalm
+kubectl create -f  --build-arg IP=$IP srcs/ftps/ftps.yalm #Giving the minikube ip as parameter to docker file
 
 
 #Grafana
