@@ -1,14 +1,14 @@
 FROM alpine
 ARG IP
 
-RUN apk update && apk add wget && apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl php7-mbstring php7-json php7-session && apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted 
+RUN apk update && apk add --no-cache bash && apk add wget && apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl php7-mbstring php7-json php7-session && apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
 
 #Get wordpress through zip
 RUN wget https://wordpress.org/latest.tar.gz
 #x for extract archive, v verbal display info, f use archive file
 RUN tar -xvf latest.tar.gz
 RUN rm latest.tar.gz
-RUN mkdir -p /www
+RUN mkdir /www
 RUN mv wordpress /www
 COPY wp-config.php /www/wordpress
 #Use sed command to change default IP by minikube ip

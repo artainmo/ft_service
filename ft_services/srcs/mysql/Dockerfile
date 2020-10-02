@@ -4,7 +4,7 @@
 
 FROM alpine
 
-RUN apk update && apk add mysql mysql-client && apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
+RUN apk update && apk add --no-cache bash && apk add mysql mysql-client && apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
 
 #Add the default wordpress tables for creation of database in container
 COPY tables.sql .

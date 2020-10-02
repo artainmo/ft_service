@@ -3,7 +3,7 @@
 
 FROM alpine
 
-RUN apk update && apk add influxdb && apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
+RUN apk update && apk add --no-cache bash && apk add influxdb && apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
 
 #Create telegraf config file, cpu and mem reads input from cpu and memroy usage and sends it to influxdb.
 RUN telegraf config --output-filter influxdb > telegraf.conf
@@ -13,4 +13,6 @@ RUN mv telegraf.conf /etc/telegraf/telegraf.conf
 
 EXPOSE 8086 // This is the default port for InfluxDB
 
-CMD telegraf && influxdb -p 8086 //Trying to launch the influxDB database
+CMD telegraf && influxd -config /etc/influxdb/influxdb.conf
+//Point the process to the correct configuration file by using the -config option
+//Trying to launch the influxDB database and telegraf

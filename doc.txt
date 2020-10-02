@@ -44,7 +44,7 @@ CONTAINERS
 Wordpress -
 Mysql -
 Phpmyadmin -
-Influxdb
-Grafana
-ftps
+Influxdb -
+Grafana - Generate grafana.db
+ftps 
 nginx
