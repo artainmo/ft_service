@@ -9,9 +9,8 @@ minikube start --driver=none
 #To clear minikube local state use minikube delete and to stop the cluster minikube stop
 minikube status
 
-#Take the external IP of minikube and save it in an external file for it to be accessible for containers
+#Take the external IP of minikube
 IP=$(minikube ip)
-$IP > srcs/ip.txt
 #Link your shell with minikube, so it has access to locally created images
 eval $(minikube docker-env)
 
@@ -33,7 +32,7 @@ kubectl create -f srcs/nginx/nginx.yalm #Create pods with YALM files (images are
 
 
 #worpdpress
-docker build --tag wordpress srcs/wordpress
+docker build --tag --build-arg IP=$IP wordpress srcs/wordpress
 kubectl create -f srcs/wordpress/wordpress.yalm
 
 
@@ -43,13 +42,13 @@ kubectl create -f srcs/influxdb/influxdb.yalm
 
 
 #phpmyadmin
-docker build --tag phpmyadmin srcs/phpmyadmin
+docker build --tag --build-arg IP=$IP phpmyadmin srcs/phpmyadmin
 kubectl create -f srcs/phpmyadmin/phpmyadmin.yalm
 
 
 #FTPS
-docker build --tag ftps srcs/ftps
-kubectl create -f  --build-arg IP=$IP srcs/ftps/ftps.yalm #Giving the minikube ip as parameter to docker file
+docker build --tag --build-arg IP=$IP ftps srcs/ftps
+kubectl create -f  srcs/ftps/ftps.yalm #Giving the minikube ip as parameter to docker file
 
 
 #Grafana

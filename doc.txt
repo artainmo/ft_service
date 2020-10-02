@@ -25,7 +25,7 @@ Every kubernetes node runs at least;
 A pod is a group of one or more containers that have shared resources, like IP address and port. By creating a deployment pods are created.
 Each pod is tied to a node until termination. In case of a failure identical pods are scheduled on other nodes.
 
-A service is a grouping of pods, the set of pods is determined by a LabalSelector. Services allow you to receive traffic and can be exposed in different ways for example through a load balancer.
+A service is a grouping of pods, the set of pods is determined by a LabelSelector. Services allow you to receive traffic and can be exposed in different ways for example through a load balancer.
 The load balancer assigns a fixed external IP ti the service, allowing you to not exposing the nodes themselves and giving one endpoint (entry point).
 
 
@@ -40,3 +40,11 @@ TODO:
 HOW TO RUN MULTIPLE INSTANCES - Not necessary for ft_service
 For increased traffics calling is necessary, this is done through changing the number of replicas.
 
+CONTAINERS
+Wordpress -
+Mysql -
+Phpmyadmin 
+Influxdb
+Grafana
+ftps
+nginx

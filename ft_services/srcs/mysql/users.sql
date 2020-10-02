@@ -1,4 +1,4 @@
-CREATE DATABASE wordpress;
+CREATE DATABASE mysql;
 CREATE USER 'artainmo'@'localhost' IDENTIFIED BY 'pass123';
 CREATE USER 'david'@'localhost' IDENTIFIED BY 'pass345';
 CREATE USER 'Louis'@'localhost' IDENTIFIED BY 'pass567';

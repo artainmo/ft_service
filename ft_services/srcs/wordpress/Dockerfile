@@ -1,6 +1,7 @@
 FROM alpine
+ARG IP
 
-RUN apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
+RUN apk update && apk add wget && apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl php7-mbstring php7-json php7-session && apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted 
 
 #Get wordpress through zip
 RUN wget https://wordpress.org/latest.tar.gz
@@ -9,9 +10,11 @@ RUN tar -xvf latest.tar.gz
 RUN rm latest.tar.gz
 RUN mkdir -p /www
 RUN mv wordpress /www
-RUN mkdir -p /run/wordpress #???!!!!
+COPY wp-config.php /www/wordpress
+#Use sed command to change default IP by minikube ip
+RUN sed 's/sed123/$IP' /www/wordpress/wp-config.php
 
-#Create telegraf config file, cpu and mem reads input from cpu and memroy usage and sends it to influxdb.
+#Create telegraf config file, cpu and mem reads input from cpu and memory usage and sends it to influxdb.
 RUN telegraf config --output-filter influxdb > telegraf.conf
 #Create default location for configuration file telegraf
 RUN mkdir -p /etc/telegraf
