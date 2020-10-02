@@ -43,7 +43,7 @@ For increased traffics calling is necessary, this is done through changing the n
 CONTAINERS
 Wordpress -
 Mysql -
-Phpmyadmin 
+Phpmyadmin -
 Influxdb
 Grafana
 ftps

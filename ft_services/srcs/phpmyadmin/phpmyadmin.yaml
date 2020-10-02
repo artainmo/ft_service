@@ -1,0 +1,41 @@
+---
+
+#Templated service configuration file
+apiVersion: v1
+kind: Service
+  metadata:
+    name: phpmyadmin-service
+      labels:
+        app: phpmyadmin
+  spec:
+    type: LoadBalancer
+    selector:
+      app: phpmyadmin
+    ports:
+      - port: 5000
+        name: http
+
+---
+
+#Templated deployment configuration file
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin-deployment
+  spec:
+  selector:
+    matchLabels:
+      app: phpmyadmin
+    replicas: 1
+    template:
+      metadata:
+        labels:
+          app: phpmyadmin
+      spec:
+        containers:
+          - name: phpmyadmin
+            image: phpmyadmin
+            imagePullPolicy: Never
+        ports:
+          - port: 5000
+            name: http

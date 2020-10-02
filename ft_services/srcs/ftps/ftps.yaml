@@ -1,0 +1,42 @@
+---
+
+#Templated service configuration file
+apiVersion: v1
+kind: Service
+  metadata:
+    name: ftps-service
+      labels:
+        app: ftps
+  spec:
+    type: LoadBalancer
+    selector:
+      app: ftps
+    ports:
+      - port: 21
+        name: http
+      #targetport -> targetport is what the service will listen to, while simply port is what other services can connect to
+
+---
+
+#Templated deployment configuration file
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ftps-deployment
+  spec:
+  selector:
+    matchLabels:
+      app: ftps
+    replicas: 1
+    template:
+      metadata:
+        labels:
+          app: ftps
+      spec:
+        containers:
+          - name: ftps
+            image: ftps
+            imagePullPolicy: Never
+        ports:
+          - port: 21
+            name: https
