@@ -46,5 +46,5 @@ Mysql -
 Phpmyadmin -
 Influxdb -
 Grafana - Generate grafana.db
-ftps 
-nginx
+ftps -
+nginx 
