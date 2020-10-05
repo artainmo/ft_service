@@ -41,10 +41,10 @@ HOW TO RUN MULTIPLE INSTANCES - Not necessary for ft_service
 For increased traffics calling is necessary, this is done through changing the number of replicas.
 
 CONTAINERS
-Wordpress -
+Wordpress - 
 Mysql -
 Phpmyadmin -
 Influxdb -
 Grafana - Generate grafana.db
 ftps -
-nginx 
+nginx -
