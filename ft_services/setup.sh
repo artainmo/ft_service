@@ -3,14 +3,17 @@ brew install kubectl
 brew install minikube
 brew install telegraf
 
-#Run minikube on the host instead of one a VM, use --driver=none, now a cluster has been created
-minikube start --driver=none
+#https://kubernetes.io/docs/tasks/tools/install-minikube/
+echo "========run minikube========"
+minikube start --vm-driver=virtualbox
+
 #Test if everything is working
 #To clear minikube local state use minikube delete and to stop the cluster minikube stop
 minikube status
 
 #Take the external IP of minikube
 IP=$(minikube ip)
+echo "========minikube IP: $IP========"
 #Link your shell with minikube, so it has access to locally created images
 eval $(minikube docker-env)
 
@@ -22,10 +25,7 @@ eval $(minikube docker-env)
 #Install metallb for load blanacer
 minikube addons configure metallb
 #Set load balancer start ip
-echo $IP
-#Set load balancer end ip
-echo $IP
-
+exit
 
 #influxdb
 docker build --tag influxdb srcs/influxdb
