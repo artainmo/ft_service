@@ -26,7 +26,6 @@ EXPOSE 5050
 
 #Command to easily build web server hosting wordpress
 CMD telegraf && php -S 0.0.0.0:5050 -t /www
-#CMD for a shell command with multiple parameters
 #php to launch php code
 # -S to start built-in web server on the given local address and port
 #php [options] -S addr:port [-t docroot]

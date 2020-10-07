@@ -26,7 +26,6 @@ EXPOSE 5000
 
 CMD telegraf && php -S 0.0.0.0:5000 -t /www/
 #Command to easily build web server hosting phpmyadmin
-#CMD for a shell command with multiple parameters
 #php to launch php code
 # -S to start built-in web server on the given local address and port
 #php [options] -S addr:port [-t docroot]

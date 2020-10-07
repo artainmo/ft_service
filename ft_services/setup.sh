@@ -24,7 +24,9 @@ eval $(minikube docker-env)
 
 #Install metallb for load blanacer
 minikube addons configure metallb
-#Set load balancer start ip
+#Set load balancer start ip and end ip -> minikube ip (will be demanded in shell)
+echo $IP
+echo $IP
 exit
 
 #influxdb
@@ -67,3 +69,4 @@ kubectl create -f srcs/grafana/grafana.yalm
 Minikube dashboard
 
 open http://$IP
+#Go to minikube ip
