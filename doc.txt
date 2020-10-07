@@ -72,3 +72,8 @@ Influxdb - -
 Grafana - - Generate grafana.db
 ftps - -
 nginx - -
+
+FT_SERVICE
+Verify the yam files
+Try to run minikube -> go to school
+Try to make the services run in whole
