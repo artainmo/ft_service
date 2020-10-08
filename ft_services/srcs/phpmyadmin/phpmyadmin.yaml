@@ -13,7 +13,6 @@ kind: Service
       app: phpmyadmin
     ports:
       - port: 5000
-        name: http
 
 ---
 
@@ -35,7 +34,6 @@ metadata:
         containers:
           - name: phpmyadmin
             image: phpmyadmin
-            imagePullPolicy: Never
-        ports:
-          - port: 5000
-            name: http
+            imagePullPolicy: Never #Take local image, do not pull from online
+            ports:
+              - port: 5000

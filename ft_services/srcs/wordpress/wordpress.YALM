@@ -13,12 +13,11 @@ kind: Service
       app: wordpress
     ports:
       - port: 5050
-        name: http
       #targetport -> targetport is what the service will listen to, while simply port is what other services can connect to
 
 ---
 
-#Templated deployment configuration file
+#Templated deployment configuration file with adjustments
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -36,7 +35,6 @@ metadata:
         containers:
           - name: wordpress
             image: wordpress
-            imagePullPolicy: Never
-        ports:
-          - port: 5050
-            name: http
+            imagePullPolicy: Never #Take local image, do not pull from online
+            ports:
+              - port: 5050

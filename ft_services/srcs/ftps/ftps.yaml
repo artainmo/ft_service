@@ -13,8 +13,6 @@ kind: Service
       app: ftps
     ports:
       - port: 21
-        name: http
-      #targetport -> targetport is what the service will listen to, while simply port is what other services can connect to
 
 ---
 
@@ -37,6 +35,5 @@ metadata:
           - name: ftps
             image: ftps
             imagePullPolicy: Never
-        ports:
-          - port: 21
-            name: https
+            ports:
+              - port: 21

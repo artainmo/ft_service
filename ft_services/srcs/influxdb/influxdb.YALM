@@ -13,8 +13,6 @@ kind: Service
       app: influxdb
     ports:
       - port: 8086
-        name: http
-      #targetport -> targetport is what the service will listen to, while simply port is what other services can connect to
 
 ---
 
@@ -37,6 +35,5 @@ metadata:
           - name: influxdb
             image: influxdb
             imagePullPolicy: Never
-        ports:
-          - port: 8086
-            name: http
+            ports:
+              - port: 8086

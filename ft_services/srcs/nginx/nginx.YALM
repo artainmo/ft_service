@@ -1,7 +1,7 @@
 --- #Indicates start of YALM file
 
 #YALM is a language used as a format for configuration files, it builds objects like for kubernetes a deployment or service object
-#Indentation (non-tab) is use to structure the code
+#Indentation (non-tab) is used to structure the code
 
 #Templated service configuration file
 apiVersion: v1
@@ -15,11 +15,13 @@ kind: Service
     selector:
       app: nginx
     ports:
-      #protocol: TCP || not sure if necessary
       - port: 80
         name: http
       - port: 443
         name: https
+      - port: 22
+        name: ssh
+      #targetport -> targetport is what the service will listen to, while simply port is what other services can connect to
 
 
 --- #Indicates start of YALM file
@@ -43,8 +45,10 @@ metadata:
           - name: nginx
             image: nginx
             imagePullPolicy: Never #Take locally created image and do not pull online docker images
-        ports:
-          - port: 80
-            name: http
-          - port: 443
-            name: https
+            ports:
+              - port: 80
+              name: http
+              - port: 443
+              name: https
+              - port: 22
+              name: ssh

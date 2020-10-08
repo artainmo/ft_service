@@ -13,8 +13,6 @@ kind: Service
       app: mysql
     ports:
       - port: 3306
-        name: http
-      #targetport -> targetport is what the service will listen to, while simply port is what other services can connect to
 
 ---
 
@@ -37,6 +35,5 @@ metadata:
           - name: mysql
             image: mysql
             imagePullPolicy: Never
-        ports:
-          - port: 3306
-            name: http
+            ports:
+              - port: 3306
