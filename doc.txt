@@ -74,6 +74,5 @@ ftps - -
 nginx - -
 
 FT_SERVICE
-Verify the yalm files
 Try to run minikube -> go to school
 Try to make the services run in whole
