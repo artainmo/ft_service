@@ -52,7 +52,6 @@ Each pod is tied to a node until termination. In case of a failure identical pod
 A service is a grouping of pods, the set of pods is determined by a LabelSelector. Services allow you to receive traffic and can be exposed in different ways for example through a load balancer.
 The load balancer assigns a fixed external IP ti the service, allowing you to not exposing the nodes themselves and giving one endpoint (entry point).
 
-
 TODO:
 - Master node / Deployment - kubectl
 - Node
@@ -63,6 +62,10 @@ TODO:
 
 HOW TO RUN MULTIPLE INSTANCES - Not necessary for ft_service
 For increased traffics calling is necessary, this is done through changing the number of replicas.
+
+YAML files describe kubernetes objects. Here we need to create for each container a service and deployment object. Plus for the containers that need to rememeber data a volume object.
+At its core volume is just a directory that contains data. When your container stops running, the data in the volume directory is not lost. Kubernetes can restart the container as in its previous state
+by using the data available in the volume directory. Different volume types exist but we will use the simplest persistentVolumeClaim, for the following data containing containers: influxdb, mysql
 
 CONTAINERS
 Wordpress - -
@@ -75,4 +78,4 @@ nginx - -
 
 FT_SERVICE
 Try to make one service run with example -> https://medium.com/faun/metallb-configuration-in-minikube-to-enable-kubernetes-service-of-type-loadbalancer-9559739787df
-Try to make each service run separately
+Try to make each service run separatly
