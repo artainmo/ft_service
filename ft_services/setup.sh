@@ -29,28 +29,18 @@ eval $(minikube docker-env)
 #Launch metallb with metallb yalm file
 #kubectl create -f metallb-system/metallb.yalm
 
-#Install metallb for load blanacer
-echo "========metallb on minikube========"
+#Install metallb for load blanacer https://medium.com/faun/metallb-configuration-in-minikube-to-enable-kubernetes-service-of-type-loadbalancer-9559739787df
 minikube addons enable metallb
 #Set load balancer start ip and end ip -> minikube ip ending with 10 - 20 (will be demanded in shell), will be set in minikube each time you reuse the same minikube
-minikube addons enable dashboard
+minikube addons configure metallb
+
 #Enable the dashboard
-minikube addons enable metrics-server
+minikube addons enable dashboard
 #Some dashboard features require the metrics-server addon
+minikube addons enable metrics-server
+#Launch the online kubernetes platform with ampersand for run in background
+Minikube dashboard &
 
-
-#influxdb
-docker build --tag influxdb srcs/influxdb
-kubectl apply -f srcs/influxdb/influxdb.yaml
-
-#nginx
-docker build --tag nginx srcs/nginx #Create image with dockerfile
-kubectl apply -f srcs/nginx/nginx.yaml #Create pods with YALM files (images are called in YALM file)
-
-#worpdpress
-docker build --tag wordpress --build-arg IP=$IP srcs/wordpress
-#docker build --tag --build-arg IP=127.0.0.1 wordpress srcs/wordpress #to test one container at a time
-kubectl apply -f srcs/wordpress/wordpress.yaml
 
 #mysql
 docker build --tag mysql srcs/mysql
@@ -60,9 +50,22 @@ kubectl apply -f srcs/mysql/mysql.yaml
 docker build --tag phpmyadmin --build-arg IP=$IP srcs/phpmyadmin
 kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
 
+#worpdpress
+docker build --tag wordpress --build-arg IP=$IP srcs/wordpress
+#docker build --tag --build-arg IP=127.0.0.1 wordpress srcs/wordpress #to test one container at a time
+kubectl apply -f srcs/wordpress/wordpress.yaml
+
+#nginx
+docker build --tag nginx srcs/nginx #Create image with dockerfile
+kubectl apply -f srcs/nginx/nginx.yaml #Create pods with YALM files (images are called in YALM file)
+
 #FTPS
 docker build --tag ftps --build-arg IP=$IP srcs/ftps
 kubectl apply -f  srcs/ftps/ftps.yaml #Giving the minikube ip as parameter to docker file
+
+#influxdb
+docker build --tag influxdb srcs/influxdb
+kubectl apply -f srcs/influxdb/influxdb.yaml
 
 #Grafana
 docker build --tag grafana srcs/grafana
@@ -70,6 +73,3 @@ kubectl apply -f srcs/grafana/grafana.yaml
 
 open http://$IP
 #Go to minikube IP
-
-#Launch the online kubernetes platform with ampersand for run in background
-Minikube dashboard &

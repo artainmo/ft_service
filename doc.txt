@@ -74,5 +74,5 @@ ftps - -
 nginx - -
 
 FT_SERVICE
-Try to run minikube -> go to school
-Try to make the services run in whole
+Try to make one service run with example -> https://medium.com/faun/metallb-configuration-in-minikube-to-enable-kubernetes-service-of-type-loadbalancer-9559739787df
+Try to make each service run separately
