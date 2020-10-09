@@ -31,8 +31,8 @@ eval $(minikube docker-env)
 
 #Install metallb for load blanacer
 echo "========metallb on minikube========"
-minikube addons configure metallb
-#Set load balancer start ip and end ip -> minikube ip (will be demanded in shell), will be set in minikube each time you reuse the same minikube
+minikube addons enable metallb
+#Set load balancer start ip and end ip -> minikube ip ending with 10 - 20 (will be demanded in shell), will be set in minikube each time you reuse the same minikube
 minikube addons enable dashboard
 #Enable the dashboard
 minikube addons enable metrics-server
