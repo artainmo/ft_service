@@ -4,36 +4,35 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ftps-service
+  name: wordpress-service
   labels:
-    app: ftps
+    app: wordpress
 spec:
   ports:
-    - port: 21
+  - port: 5050
   type: LoadBalancer
   selector:
-    app: ftps
+    app: wordpress
 
 ---
 
-#Templated deployment configuration file
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ftps-deployment
+  name: wordpress-deployment
 spec:
   selector:
     matchLabels:
-      run: ftps
+      run: wordpress
   replicas: 1
   template:
     metadata:
       labels:
-        run: ftps
+        run: wordpress
     spec:
       containers:
-      - name: ftps
-        image: ftps
+      - name: wordpress
+        image: wordpress
         imagePullPolicy: Never
         ports:
-        - containerPort: 21
+        - containerPort: 5050

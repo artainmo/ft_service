@@ -4,15 +4,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ftps-service
+  name: grafana-service
   labels:
-    app: ftps
+    app: grafana
 spec:
   ports:
-    - port: 21
+    - port: 3000
   type: LoadBalancer
   selector:
-    app: ftps
+    app: grafana
 
 ---
 
@@ -20,20 +20,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ftps-deployment
+  name: grafana-deployment
 spec:
   selector:
     matchLabels:
-      run: ftps
+      run: grafana
   replicas: 1
   template:
     metadata:
       labels:
-        run: ftps
+        run: grafana
     spec:
       containers:
-      - name: ftps
-        image: ftps
+      - name: grafana
+        image: grafana
         imagePullPolicy: Never
         ports:
-        - containerPort: 21
+        - containerPort: 3000

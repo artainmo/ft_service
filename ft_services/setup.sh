@@ -1,10 +1,16 @@
-#Installing kubectl for the master node commands and minikub to run the cluster on it
-brew install kubectl
-brew install minikube
-brew install telegraf
+#To relaunch each time;
+#export MINIKUBE_HOME=/Users/artainmo/goinfre
+#minikube delete
+#rm -rf goinfre/.minikube
+#Uninstall and reinstall vm in managed software center
+#Restart computer
+HOMEBREW_NO_AUTO_UPDATE=1 brew install kubectl
+HOMEBREW_NO_AUTO_UPDATE=1 brew install minikube
+HOMEBREW_NO_AUTO_UPDATE=1 brew install telegraf
 
 #https://kubernetes.io/docs/tasks/tools/install-minikube/
 echo "========run minikube========"
+export MINIKUBE_HOME=/Users/artainmo/goinfre #Minikube in goinfre no memory problem
 minikube start --vm-driver=virtualbox
 
 #Test if everything is working
@@ -13,7 +19,8 @@ minikube status
 
 #Take the external IP of minikube
 IP=$(minikube ip)
-echo "========minikube IP: $IP========"
+echo "========minikube IP========"
+echo $IP
 #Link your shell with minikube, so it has access to locally created images
 eval $(minikube docker-env)
 
@@ -23,50 +30,46 @@ eval $(minikube docker-env)
 #kubectl create -f metallb-system/metallb.yalm
 
 #Install metallb for load blanacer
+echo "========metallb on minikube========"
 minikube addons configure metallb
-#Set load balancer start ip and end ip -> minikube ip (will be demanded in shell)
-echo $IP
-echo $IP
-exit
+#Set load balancer start ip and end ip -> minikube ip (will be demanded in shell), will be set in minikube each time you reuse the same minikube
+minikube addons enable dashboard
+#Enable the dashboard
+minikube addons enable metrics-server
+#Some dashboard features require the metrics-server addon
+
 
 #influxdb
 docker build --tag influxdb srcs/influxdb
-kubectl create -f srcs/influxdb/influxdb.yalm
+kubectl apply -f srcs/influxdb/influxdb.yaml
 
 #nginx
 docker build --tag nginx srcs/nginx #Create image with dockerfile
-kubectl create -f srcs/nginx/nginx.yalm #Create pods with YALM files (images are called in YALM file)
-
+kubectl apply -f srcs/nginx/nginx.yaml #Create pods with YALM files (images are called in YALM file)
 
 #worpdpress
 docker build --tag wordpress --build-arg IP=$IP srcs/wordpress
 #docker build --tag --build-arg IP=127.0.0.1 wordpress srcs/wordpress #to test one container at a time
-kubectl create -f srcs/wordpress/wordpress.yalm
+kubectl apply -f srcs/wordpress/wordpress.yaml
 
 #mysql
 docker build --tag mysql srcs/mysql
-kubectl create -f srcs/mysql/mysql.yalm
-
-#influxdb
-docker build --tag influxdb srcs/influxdb
-kubectl create -f srcs/influxdb/influxdb.yalm
+kubectl apply -f srcs/mysql/mysql.yaml
 
 #phpmyadmin
 docker build --tag phpmyadmin --build-arg IP=$IP srcs/phpmyadmin
-kubectl create -f srcs/phpmyadmin/phpmyadmin.yalm
-
+kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
 
 #FTPS
 docker build --tag ftps --build-arg IP=$IP srcs/ftps
-kubectl create -f  srcs/ftps/ftps.yalm #Giving the minikube ip as parameter to docker file
-
+kubectl apply -f  srcs/ftps/ftps.yaml #Giving the minikube ip as parameter to docker file
 
 #Grafana
 docker build --tag grafana srcs/grafana
-kubectl create -f srcs/grafana/grafana.yalm
-
-#Launch the online kubernetes platform
-Minikube dashboard
+kubectl apply -f srcs/grafana/grafana.yaml
 
 open http://$IP
-#Go to minikube ip
+#Go to minikube IP
+
+#Launch the online kubernetes platform with ampersand for run in background
+Minikube dashboard &
