@@ -32,7 +32,9 @@ eval $(minikube docker-env)
 #Install metallb for load blanacer https://medium.com/faun/metallb-configuration-in-minikube-to-enable-kubernetes-service-of-type-loadbalancer-9559739787df
 minikube addons enable metallb
 #Set load balancer start ip and end ip -> minikube ip ending with 10 - 20 (will be demanded in shell), will be set in minikube each time you reuse the same minikube
-minikube addons configure metallb
+#minikube addons configure metallb
+kubectl apply -f srcs/metallb.yaml
+#configure metallb with configmap object
 
 #Enable the dashboard
 minikube addons enable dashboard
