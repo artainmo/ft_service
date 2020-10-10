@@ -29,11 +29,15 @@ docker system prune
 Docker run -it image sh
 
 Docker build --tag img .
-Docker run -p 5050:5050 -d --name i2 img
+Docker run -p 5050:5050 -dit --name i2 img
 docker-machine ip
 
-Docker system prune -> image
+Docker system prune
 Docker rm -f container-id
+Docker image rm
+
+Docker images 
+Docker ps
 
 Minikube:
 minikube delete -p minikube
@@ -84,8 +88,14 @@ ftps - -
 nginx - -
 
 FT_SERVICE
-Check if endpoints (endpoints get only activated the second time you setup???)
-Try each image locally
-Try to make each service run separately
+Try each image locally -> try wordpress
+Try to make each service run separately:
+- Grafana - .db
+- nginx - ssh
+- mysql 
+- phpmyadmin
+-...
+Put telegraph back
 Nginx can be used locally so error happens elsewhere plus without telegraph error persists, error in yaml file 
 SSH user on port 22
+Grafana.db
