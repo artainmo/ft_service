@@ -41,7 +41,6 @@ minikube addons enable metrics-server
 #Launch the online kubernetes platform with ampersand for run in background
 Minikube dashboard &
 
-
 #mysql
 docker build --tag mysql srcs/mysql
 kubectl apply -f srcs/mysql/mysql.yaml
@@ -52,7 +51,8 @@ kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
 
 #worpdpress
 docker build --tag wordpress --build-arg IP=$IP srcs/wordpress
-#docker build --tag --build-arg IP=127.0.0.1 wordpress srcs/wordpress #to test one container at a time
+#docker build --tag wordpress --build-arg IP=127.0.0.1 srcs/wordpress #to test one container at a time
+#docker build --tag wordpress --build-arg IP=127.0.0.1 .
 kubectl apply -f srcs/wordpress/wordpress.yaml
 
 #nginx

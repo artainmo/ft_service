@@ -28,6 +28,13 @@ docker system prune
 #View content of a docker image, through a shell
 Docker run -it image sh
 
+Docker build --tag img .
+Docker run -p 5050:5050 -d --name i2 img
+docker-machine ip
+
+Docker system prune -> image
+Docker rm -f container-id
+
 Minikube:
 minikube delete -p minikube
 Virtualbox -> settings -> system -> processor -> 2cores
@@ -77,5 +84,8 @@ ftps - -
 nginx - -
 
 FT_SERVICE
-Try to make one service run with example -> https://medium.com/faun/metallb-configuration-in-minikube-to-enable-kubernetes-service-of-type-loadbalancer-9559739787df
-Try to make each service run separatly
+Check if endpoints (endpoints get only activated the second time you setup???)
+Try each image locally
+Try to make each service run separately
+Nginx can be used locally so error happens elsewhere plus without telegraph error persists, error in yaml file 
+SSH user on port 22

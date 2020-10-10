@@ -1,5 +1,3 @@
----
-
 #Templated service configuration file
 apiVersion: v1
 kind: Service
@@ -10,6 +8,7 @@ metadata:
 spec:
   ports:
   - port: 8086
+    targetPort: 8086
   type: ClusterIP
   selector:
     app: influxdb
@@ -28,7 +27,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 1Gi
 
 ---
 

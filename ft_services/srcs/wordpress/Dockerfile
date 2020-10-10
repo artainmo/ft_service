@@ -14,6 +14,7 @@ RUN rm -rf wordpress
 COPY wp-config.php /www
 #Use sed command to change default IP by minikube ip
 RUN sed -i "s/sed123/$IP/" /www/wp-config.php
+RUN echo $IP
 
 #Create telegraf config file, cpu and mem reads input from cpu and memory usage and sends it to influxdb.
 RUN telegraf config --output-filter influxdb > telegraf.conf
@@ -25,7 +26,7 @@ RUN mv telegraf.conf etc/telegraf/telegraf.conf
 EXPOSE 5050
 
 #Command to easily build web server hosting wordpress
-CMD telegraf && php -S 0.0.0.0:5050 -t /www
+CMD php -S 0.0.0.0:5050 -t /www && telegraf
 #php to launch php code
 # -S to start built-in web server on the given local address and port
 #php [options] -S addr:port [-t docroot]

@@ -1,5 +1,3 @@
----
-
 #Templated service configuration file
 apiVersion: v1
 kind: Service
@@ -10,6 +8,7 @@ metadata:
 spec:
   ports:
   - port: 5000
+    targetPort: 5000
   type: LoadBalancer
   selector:
     app: phpmyadmin

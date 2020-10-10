@@ -1,5 +1,3 @@
----
-
 #Templated service configuration file
 apiVersion: v1
 kind: Service
@@ -10,6 +8,7 @@ metadata:
 spec:
   ports:
   - port: 3306
+    targetPort: 3306
   type: ClusterIP
   selector:
     app: mysql
@@ -28,7 +27,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 1Gi
 
 ---
 
