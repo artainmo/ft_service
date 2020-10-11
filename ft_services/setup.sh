@@ -48,13 +48,11 @@ docker build --tag mysql srcs/mysql
 kubectl apply -f srcs/mysql/mysql.yaml
 
 #phpmyadmin
-docker build --tag phpmyadmin --build-arg IP=$IP srcs/phpmyadmin
+docker build --tag phpmyadmin srcs/phpmyadmin
 kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
 
 #worpdpress
 docker build --tag wordpress --build-arg IP=$IP srcs/wordpress
-#docker build --tag wordpress --build-arg IP=127.0.0.1 srcs/wordpress #to test one container at a time
-#docker build --tag wordpress --build-arg IP=127.0.0.1 .
 kubectl apply -f srcs/wordpress/wordpress.yaml
 
 #nginx

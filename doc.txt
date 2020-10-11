@@ -89,13 +89,17 @@ nginx - -
 
 FT_SERVICE
 Try each image locally -> try wordpress
-Try to make each service run separately:
+Try to make each service run separately: use ip with http not https and with :port
 - Grafana - .db
 - nginx - ssh
-- mysql 
-- phpmyadmin
--...
+- wordpress -
+- mysql =
+- phpmyadmin -
+- ftps 
+- influxdb
+
 Put telegraph back
 Nginx can be used locally so error happens elsewhere plus without telegraph error persists, error in yaml file 
 SSH user on port 22
 Grafana.db
+Correct metallb -> slack
