@@ -30,3 +30,6 @@ EXPOSE 21
 CMD telegraf && pure-ftpd -p 21:21 -P $IP #Trying to launch
 #-p for minport:maxport
 #-P for IP address
+
+
+#ftp platform -> https://filezilla-project.org/

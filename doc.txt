@@ -95,8 +95,8 @@ Try to make each service run separately: use ip with http not https and with :po
 - wordpress -
 - mysql =
 - phpmyadmin -
-- ftps 
-- influxdb
+- ftps
+- influxdb -
 
 Put telegraph back
 Nginx can be used locally so error happens elsewhere plus without telegraph error persists, error in yaml file 

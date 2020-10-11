@@ -13,8 +13,8 @@ RUN tar -xvf grafana-6.7.2.linux-amd64.tar.gz
 RUN rm grafana-6.7.2.linux-amd64.tar.gz
 
 #Set for the corection the grafana.db file for demanded grafana dashboard configurations like connection with influxdb
-#RUN mkdir grafana-6.7.2/data
-#COPY grafana.db grafana-6.7.2/data/
+RUN mkdir grafana-6.7.2/data
+COPY grafana.db grafana-6.7.2/data/
 #To provide an already-configured version of Grafana, setup a blank Grafana setup, launch your container, configure everything on online dashboard.
 #Then save the grafana.db file on your computer (you can use "kubectl cp" to get data from a running pod). You can now copy this file in your container.
 #grafana.db will be found in /data
@@ -34,4 +34,4 @@ CMD cd ./grafana-6.7.2/bin/grafana-server # && telegraf
 #Start grafana by executing the binary grafana-server on linux with web argument
 
 
-#admin - admin -> user name and password
+#admin - admin -> user name and password (default)
