@@ -1,0 +1,44 @@
+#Port is used to indicate different services in same container but on different ports
+#targetport is the actual port the service is running on
+#wordpress and phpmyadmin need a targetport of 80
+#Because they are launched with an httpd(http deamon), httpd listens on port 80 to send and receive html pages or data
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+      - name: wordpress
+        image: wordpress_img
+        imagePullPolicy: Never
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress
+spec:
+  ports:
+  - name: http
+    port: 5050
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: wordpress
+  type: LoadBalancer
+  loadBalancerIP: 192.168.99.131

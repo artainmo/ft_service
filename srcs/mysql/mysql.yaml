@@ -1,0 +1,51 @@
+#ClusterIP is only used for connection between pod and service while loadbalancer is used for web/external connection to the pod.
+#Loadbalancers are used to assign a pool of ips to different services in a different way, thus using loadbalancers for single ips makes no sense.
+
+#When application crash and need to be restarted all associated files are deleted / data is lost. Often times data needs to be shared between containers. Kubernetes volume objects resolve both problems.
+#The pod object uses ".spec.containers[*].volumeMounts" to indicate where to move the data and what volumes to provide with "spec.volumes"
+#You can mounth volume to path of choice but generally var/lib/nameapp is used
+#persistentvolumeclaim is used to mount/build a persistentvolume. They allow to claim storage and are simple to use. Both persistentvolume and persistentvolumeclaim object need to be declared in yalm, before depoyment object.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql_img
+        volumeMounts:
+          - name: mysql-volume
+            mountPath: /var/lib/mysql
+        imagePullPolicy: Never
+      volumes:
+      - name: mysql-volume
+        persistentVolumeClaim:
+          claimName: mysql-pvc
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  ports:
+  - name: http
+    port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    app: mysql
+  type: ClusterIP

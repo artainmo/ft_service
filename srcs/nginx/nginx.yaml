@@ -1,0 +1,59 @@
+#YALM is a language used as a format for configuration files, it builds objects like for kubernetes a deployment or service object
+#Indentation (non-tab) is used to structure the code
+#imagePullPolicy means allowing to pull online image or take image locally
+
+#Some applications are subject to bugs when running for a long time and need to be restarted automatically. livenessProbe is used to check the pod health and restarts it when necessary.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx_img
+        imagePullPolicy: Never
+        livenessProbe:
+          tcpSocket:
+            port: 22
+          initialDelaySeconds: 4
+          periodSeconds: 4
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 443
+  - name: ssh
+    port: 22
+    protocol: TCP
+    targetPort: 22
+  selector:
+    app: nginx
+  type: LoadBalancer
+  loadBalancerIP: 192.168.99.130

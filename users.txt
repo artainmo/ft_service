@@ -1,0 +1,4 @@
+phpmyadmin - artainmo : pass123
+grafana - artainmo : pass123
+ssh - artainmo@IP : pass123
+ftps - IP : artainmo : pass123 : 21
