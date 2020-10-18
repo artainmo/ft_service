@@ -85,9 +85,9 @@ ftps -
 Telegraf -> influxdb -> grafana -
 
 TODO
-Review all yalm
+Solve "It works!" Problem -> it appears even on validated projects
 Phpmyadmin - wordpress on nginx
--wordpress on nginx
+-wordpress on nginx | qtry to remove from start
 -phpmyadmin on nginx with https
 -wordpress and phpmyadmin nginx redirection -> see .conf
 Test container persistence

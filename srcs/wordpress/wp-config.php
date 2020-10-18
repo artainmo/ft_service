@@ -9,9 +9,9 @@ $table_prefix = 'wp_';
 /** The name of the database for WordPress */
 define( 'DB_NAME', 'wordpress' );
 /** MySQL database username */
-define( 'DB_USER', 'wp_admin' );
+define( 'DB_USER', 'artainmo' );
 /** MySQL database password */
-define( 'DB_PASSWORD', 'admin' );
+define( 'DB_PASSWORD', 'pass123' );
 /** MySQL hostname */
 define( 'DB_HOST', 'mysql' );
 

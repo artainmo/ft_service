@@ -13,7 +13,7 @@ RUN tar -xvf phpMyAdmin-4.9.0.1-all-languages.tar.gz
 RUN rm phpMyAdmin-4.9.0.1-all-languages.tar.gz
 
 #Set phpmyadmin and its config
-RUN rm -f /var/www/localhost/htdocs/index.html #remove the hhtpd index file "It works!"
+RUN rm -f /var/www/localhost/httdocs/index.html #remove the httpd index file "It works!"
 RUN mv phpMyAdmin-4.9.0.1-all-languages/* /var/www/localhost/htdocs/
 COPY config.inc.php var/www/localhost/htdocs/config.inc.php
 

@@ -9,9 +9,9 @@ FROM alpine
 RUN apk update && apk add nginx openssl openssh
 
 #Install telegraf with conf towards influxdb
-#RUN apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
-#RUN mkdir -p /etc/telegraf
-#COPY ./telegraf.conf /etc/telegraf/telegraf.conf
+RUN apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
+RUN mkdir -p /etc/telegraf
+COPY ./telegraf.conf /etc/telegraf/telegraf.conf
 
 #Config nginx
 RUN adduser -D www; #Creation of user linked with nginx.conf, -D means default
@@ -33,5 +33,6 @@ EXPOSE 80 443 22
 CMD telegraf & /usr/sbin/sshd && nginx -g "daemon off;"
 
 #Launch shh deamon, telegraf and nginx
+#-g to give directive of running in foreground
 
 #Difference between RUN and CMD. RUN runs the command and commits the result, while CMD doe snot execute anything at build time but specifies the intended command for the image.

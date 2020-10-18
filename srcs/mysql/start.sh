@@ -5,10 +5,10 @@ mysql_install_db --user=root --ldata=/var/lib/mysql
 #Creation of users.sql file with sql commands to create a database and users
 cat > /tmp/users.sql << end
 CREATE DATABASE wordpress;
-CREATE USER 'wp_admin'@'%' IDENTIFIED BY 'admin';
+CREATE USER 'artainmo'@'%' IDENTIFIED BY 'pass123';
 CREATE USER 'david'@'%' IDENTIFIED BY 'pass345';
 CREATE USER 'Louis'@'%' IDENTIFIED BY 'pass567';
-GRANT ALL PRIVILEGES ON *.* TO 'wp_admin'@'%' IDENTIFIED BY 'admin' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'artainmo'@'%' IDENTIFIED BY 'pass123' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 end
 
