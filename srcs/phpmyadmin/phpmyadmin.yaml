@@ -32,7 +32,7 @@ spec:
   - name: http
     port: 5000
     protocol: TCP
-    targetPort: 80
+    targetPort: 5000
   selector:
     app: phpmyadmin
   type: LoadBalancer

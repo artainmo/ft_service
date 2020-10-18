@@ -23,6 +23,8 @@ docker kill <container ID>
 docker system prune
 #View content of a docker image, through a shell
 Docker run -it image sh
+#enter running container
+docker exec -it <container name> /bin/sh
 
 Docker build --tag img .
 Docker run -p 5050:5050 -dit --name i2 img
@@ -86,6 +88,7 @@ Telegraf -> influxdb -> grafana -
 
 TODO
 Solve "It works!" Problem -> it appears even on validated projects
+-> not on school, on school I get written code
 Phpmyadmin - wordpress on nginx
 -wordpress on nginx | qtry to remove from start
 -phpmyadmin on nginx with https
