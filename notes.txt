@@ -23,8 +23,6 @@ docker kill <container ID>
 docker system prune
 #View content of a docker image, through a shell
 Docker run -it image sh
-#enter running container
-docker exec -it <container name> /bin/sh
 
 Docker build --tag img .
 Docker run -p 5050:5050 -dit --name i2 img
@@ -87,12 +85,10 @@ ftps -
 Telegraf -> influxdb -> grafana -
 
 TODO
-Solve "It works!" Problem -> it appears even on validated projects
--> not on school, on school I get written code
+-> "It works!" index page bug does not appear at school computers
 Phpmyadmin - wordpress on nginx
--wordpress on nginx | qtry to remove from start
--phpmyadmin on nginx with https
--wordpress and phpmyadmin nginx redirection -> see .conf
+phpmyadmin on nginx with https
+wordpress and phpmyadmin nginx redirection -> see .conf
 Test container persistence
 -> mount and volume name has been changed! Storageclassname and  host path have been removed
 Check new subject

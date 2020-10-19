@@ -7,8 +7,8 @@ HOMEBREW_NO_AUTO_UPDATE=1 brew install telegraf
 
 
 echo "========Minikube setup========"
-export MINIKUBE_HOME=/Users/artainmo/goinfre #Minikube in goinfre no memory problem
-#export MINIKUBE_HOME=/Users/arthurtainmont/goinfre
+#export MINIKUBE_HOME=/Users/artainmo/goinfre #Minikube in goinfre no memory problem
+export MINIKUBE_HOME=/Users/arthurtainmont/goinfre
 minikube start --vm-driver=virtualbox
 minikube status #Test if everything is working
 #Link your shell with minikube, so it has access to locally created images

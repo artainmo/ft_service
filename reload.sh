@@ -43,8 +43,8 @@ kubectl apply -f srcs/wordpress/wordpress.yaml
 # docker build -t ftps_img srcs/ftps
 # kubectl create -f srcs/ftps/ftps.yaml
 #
-# docker build -t phpmyadmin_img srcs/phpmyadmin
-# kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
+docker build -t phpmyadmin_img srcs/phpmyadmin
+kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
 #
 # docker build -t grafana_img srcs/grafana
 # kubectl create -f srcs/grafana/grafana.yaml
