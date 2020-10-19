@@ -2,7 +2,7 @@
 
 
 #Be in the minikube shell
-export MINIKUBE_HOME=/Users/arthurtainmont/goinfre
+export MINIKUBE_HOME=/Users/artainmo/goinfre
 eval $(minikube docker-env)
 
 #delete images and kubernetes objects

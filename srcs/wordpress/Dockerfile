@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk update && apk add nginx && apk add wget && apk add apache2 php7-apache2  php7 php-mysqli php7-fpm php7-json php-mbstring php-iconv php-gettext php7-session
+RUN apk update && apk add wget && apk add nginx && apk add php7 php7-fpm php7-iconv php7-json php7-mbstring php7-mysqli php7-phar php7-session
 
 
 #Install telegraf with conf towards influxdb
@@ -27,4 +27,5 @@ RUN nginx -t
 
 EXPOSE 5050
 
-CMD nginx -g "daemon off;" #& telegraf
+CMD php -S 0.0.0.0:5000 -t /www/
+#CMD nginx -g "daemon off;" #& telegraf

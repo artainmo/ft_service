@@ -85,9 +85,10 @@ ftps -
 Telegraf -> influxdb -> grafana -
 
 TODO
+Make sure it the container works correctly
 -> "It works!" index page bug does not appear at school computers
-Phpmyadmin - wordpress on nginx
-phpmyadmin on nginx with https
+Phpmyadmin - wordpress on nginx -> slack awarebae
+phpmyadmin on nginx with https -> slack awarebae phpconfig
 wordpress and phpmyadmin nginx redirection -> see .conf
 Test container persistence
 -> mount and volume name has been changed! Storageclassname and  host path have been removed

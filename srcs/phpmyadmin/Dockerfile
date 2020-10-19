@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk update && apk add wget && apk add nginx && apk add php7 php-mysqli php7-fpm php7-json php-mbstring php-iconv php-gettext php7-session
+RUN apk update && apk add wget && apk add nginx && apk add php7 php7-fpm php7-iconv php7-json php7-mbstring php7-mysqli php7-phar php7-session && apk add supervisor --repository https://pkgs.alpinelinux.org/package/v3.3/main/x86/supervisor
 
 #Install telegraf with conf towards influxdb
 RUN apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
@@ -24,6 +24,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 RUN mkdir -p /run/nginx #Last command is demanded by "nginx -t" config file test, to create nginx.pid file
 RUN nginx -t
 #Check if config file is correct
+
+RUN ./usr/bin/supervisord
 
 EXPOSE 5000
 
