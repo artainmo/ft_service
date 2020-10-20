@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk update && apk add wget && apk add nginx && apk add php7 php7-fpm php7-iconv php7-json php7-mbstring php7-mysqli php7-phar php7-session && apk add supervisor --repository https://pkgs.alpinelinux.org/package/v3.3/main/x86/supervisor
+RUN apk update && apk add openrc && apk add wget && apk add nginx && apk add php7 php7-fpm php7-iconv php7-json php7-mbstring php7-mysqli php7-phar php7-session
 
 #Install telegraf with conf towards influxdb
 RUN apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
@@ -14,20 +14,17 @@ RUN mv phpMyAdmin-4.9.0.1-all-languages phpmyadmin
 RUN rm phpMyAdmin-4.9.0.1-all-languages.tar.gz
 
 #Set phpmyadmin and its config
-COPY config.inc.php var/www/localhost/htdocs/config.inc.php
+COPY config.inc.php phpmyadmin/config.inc.php
 
 #Config nginx
 RUN adduser -D www; #Creation of user linked with nginx.conf, -D means default
-#RUN chown -R www:www /var/lib/nginx
-#RUN chown -R www:www /phpmyadmin
+RUN chown -R www:www /var/lib/nginx
+RUN chown -R www:www /phpmyadmin
 COPY nginx.conf /etc/nginx/nginx.conf
 RUN mkdir -p /run/nginx #Last command is demanded by "nginx -t" config file test, to create nginx.pid file
 RUN nginx -t
 #Check if config file is correct
 
-RUN ./usr/bin/supervisord
-
-EXPOSE 5000
-
-CMD nginx -g "daemon off;" #& telegraf
-#httpd is an apache http server, it runs as deamon process
+COPY start.sh .
+RUN chmod +x start.sh
+CMD ./start.sh

@@ -1,7 +1,7 @@
 FROM alpine
 
-RUN apk update && apk add wget && apk add nginx && apk add php7 php7-fpm php7-iconv php7-json php7-mbstring php7-mysqli php7-phar php7-session
-
+RUN apk update && apk add openrc && apk add wget && apk add nginx && apk add php7 php7-fpm php7-iconv php7-json php7-mbstring php7-mysqli php7-phar php7-session
+#openrc is a system necessary to start the php-fpm service, that will read the php code for fastCGI for nginx
 
 #Install telegraf with conf towards influxdb
 RUN apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
@@ -18,8 +18,8 @@ COPY wp-config.php /wordpress/wp-config.php
 
 #Config nginx
 RUN adduser -D www; #Creation of user linked with nginx.conf, -D means default
-#RUN chown -R www:www /var/lib/nginx #Does not help with wrong php code display
-#RUN chown -R www:www /wordpress
+RUN chown -R www:www /var/lib/nginx
+RUN chown -R www:www /wordpress
 COPY nginx.conf /etc/nginx/nginx.conf
 RUN mkdir -p /run/nginx #Last command is demanded by "nginx -t" config file test, to create nginx.pid file
 RUN nginx -t
@@ -27,5 +27,6 @@ RUN nginx -t
 
 EXPOSE 5050
 
-CMD php -S 0.0.0.0:5000 -t /www/
-#CMD nginx -g "daemon off;" #& telegraf
+COPY start.sh .
+RUN chmod +x start.sh
+CMD ./start.sh

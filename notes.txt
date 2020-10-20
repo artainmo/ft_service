@@ -23,6 +23,10 @@ docker kill <container ID>
 docker system prune
 #View content of a docker image, through a shell
 Docker run -it image sh
+Simply run in background
+Docker -d -p 80:80 img
+Enter running container
+Docker exec containerid sh
 
 Docker build --tag img .
 Docker run -p 5050:5050 -dit --name i2 img
@@ -85,11 +89,6 @@ ftps -
 Telegraf -> influxdb -> grafana -
 
 TODO
-Make sure it the container works correctly
-Try to launch php-fpm before launching nginx
--> "It works!" index page bug does not appear at school computers
-Phpmyadmin - wordpress on nginx -> slack awarebae
-phpmyadmin on nginx with https -> slack awarebae phpconfig
 wordpress and phpmyadmin nginx redirection -> see .conf
 Test container persistence
 -> mount and volume name has been changed! Storageclassname and  host path have been removed
@@ -102,3 +101,12 @@ One IP? Loadbalancer should balance services over an IP range...
 USAGE
 To test ftps -> https://filezilla-project.org/
 To test ssh -> ssh user@IP
+
+OCCURED BUGS
+Machine-ip ip -> not working:
+(./docker-setup)
+docker-machine rm default
+docker-machine create --driver virtualbox default
+docker-machine env default
+eval $(docker-machine env default)
+
