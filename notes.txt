@@ -89,12 +89,13 @@ ftps -
 Telegraf -> influxdb -> grafana -
 
 TODO
-Wordpress css js -> tried all from stackoveerflow and does not work....
-Phpmyadmin reverse proxy -> ssl?
-Test container persistence
+Phpmyadmin reverse proxy -> ssl? --
+
+
+Test container persistence --
 -> mount and volume name has been changed! Storageclassname and  host path have been removed
 -> volume creation error yaml
-Check new subject
+Wordpress css js -> tried all from stackoveerflow and does not work.... / sometimes it randomly is correct
 
 One IP? Loadbalancer should balance services over an IP range...
 - https://metallb.universe.tf/usage/ -> how to force multiple services on one IP
@@ -102,6 +103,8 @@ One IP? Loadbalancer should balance services over an IP range...
 
 USAGE
 To test ftps -> https://filezilla-project.org/
+APP = pure-ftpd
+APP = influxd
 To test ssh -> ssh user@IP
 
 OCCURED BUGS
@@ -111,4 +114,5 @@ docker-machine rm default
 docker-machine create --driver virtualbox default
 docker-machine env default
 eval $(docker-machine env default)
+proxy_pass phpmyadmin => set /phpmyadmin/index.php
 

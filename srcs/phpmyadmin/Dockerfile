@@ -17,8 +17,8 @@ RUN rm phpMyAdmin-4.9.0.1-all-languages.tar.gz
 COPY config.inc.php phpmyadmin/config.inc.php
 
 #Config nginx
-RUN mkdir /etc/nginx/ssl
-RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out /etc/nginx/ssl/user.pem -keyout /etc/nginx/ssl/user.key -subj "/C=BE/ST=Bxl/L=Bruxelles/O=s19/OU=artainmo/CN=ft_services"
+#RUN mkdir /etc/nginx/ssl
+#RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out /etc/nginx/ssl/user.pem -keyout /etc/nginx/ssl/user.key -subj "/C=BE/ST=Bxl/L=Bruxelles/O=s19/OU=artainmo/CN=ft_services"
 RUN adduser -D www; #Creation of user linked with nginx.conf, -D means default
 RUN chown -R www:www /var/lib/nginx
 RUN chown -R www:www /phpmyadmin
@@ -26,6 +26,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 RUN mkdir -p /run/nginx #Last command is demanded by "nginx -t" config file test, to create nginx.pid file
 RUN nginx -t
 #Check if config file is correct
+
+EXPOSE 5000
 
 COPY start.sh .
 RUN chmod +x start.sh

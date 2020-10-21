@@ -15,16 +15,10 @@ define( 'DB_PASSWORD', 'pass123' );
 /** MySQL hostname */
 define( 'DB_HOST', 'mysql' );
 
-
-//define( 'FORCE_SSL_ADMIN', true );
-//$_SERVER['HTTPS']='on';
 //define wordpress url
-define( 'WP_SITEURL', 'http://192.168.99.131:5050' );
+//define( 'WP_SITEURL', 'http://192.168.99.131:5050' );
 //define wordpress homepage url
-define( 'WP_HOME', 'http://192.168.99.131:5050' );
-
-define( 'CONCATENATE_SCRIPTS', false );
-define( 'SCRIPT_DEBUG', true );
+//define( 'WP_HOME', 'http://192.168.99.131:5050' );
 
 //Setting authorization keys
 define( 'AUTH_KEY',         'pass' );
