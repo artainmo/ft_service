@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk update && apk add openrc && apk add wget && apk add nginx && apk add php7 php7-fpm php7-iconv php7-json php7-mbstring php7-mysqli php7-phar php7-session
+RUN apk update && apk add openrc && apk add openssl && apk add wget && apk add nginx && apk add php7 php7-fpm php7-iconv php7-json php7-mbstring php7-mysqli php7-phar php7-session
 
 #Install telegraf with conf towards influxdb
 RUN apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
@@ -17,6 +17,8 @@ RUN rm phpMyAdmin-4.9.0.1-all-languages.tar.gz
 COPY config.inc.php phpmyadmin/config.inc.php
 
 #Config nginx
+RUN mkdir /etc/nginx/ssl
+RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out /etc/nginx/ssl/user.pem -keyout /etc/nginx/ssl/user.key -subj "/C=BE/ST=Bxl/L=Bruxelles/O=s19/OU=artainmo/CN=ft_services"
 RUN adduser -D www; #Creation of user linked with nginx.conf, -D means default
 RUN chown -R www:www /var/lib/nginx
 RUN chown -R www:www /phpmyadmin

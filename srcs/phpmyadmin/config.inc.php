@@ -10,5 +10,8 @@
 
 $cfg['Servers'][1]['host'] = "mysql";
 $cfg['Servers'][1]['port'] = "3306";
+#$cfg['Servers'][1]['ssl'] = true
+#$cfg['Servers'][1]['ssl_key'] = '/etc/nginx/ssl/user.pem'
+#$cfg['Servers'][1]['ssl_cert'] = '/etc/nginx/ssl/user.key'
 
 ?>

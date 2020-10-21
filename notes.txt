@@ -89,9 +89,11 @@ ftps -
 Telegraf -> influxdb -> grafana -
 
 TODO
-wordpress and phpmyadmin nginx redirection -> see .conf
+Wordpress css js -> tried all from stackoveerflow and does not work....
+Phpmyadmin reverse proxy -> ssl?
 Test container persistence
 -> mount and volume name has been changed! Storageclassname and  host path have been removed
+-> volume creation error yaml
 Check new subject
 
 One IP? Loadbalancer should balance services over an IP range...
