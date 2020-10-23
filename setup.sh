@@ -13,7 +13,6 @@ minikube start --vm-driver=virtualbox
 minikube status #Test if everything is working
 #Link your shell with minikube, so it has access to locally created images
 eval $(minikube docker-env)
-#IP=$(minikube ip) #Take the external IP of minikube
 minikube addons enable dashboard
 minikube addons enable metrics-server #Some dashboard features require the metrics-server addon
 minikube dashboard & #launch minikube dashboard with & to make run in background
@@ -62,11 +61,14 @@ kubectl create -f srcs/phpmyadmin/phpmyadmin.yaml
 docker build -t grafana_img srcs/grafana
 kubectl create -f srcs/grafana/grafana.yaml
 
-#Import own .sql file to add users to mysql database
-#kubectl exec -i `kubectl get pods | grep -o "mysql\S*"` -- mysql -u root wordpress < srcs/mysql/wp_users.sql
-#.sql has been generated, by adding users manually in phpmyadmin, going to export phpmyadmin section and generating .sql file
+
+#Import own .sql file to add users to mysql database, do it at end once mysql pod is already created
+kubectl exec -i $(kubectl get pods | grep mysql | cut -d ' ' -f 1) -- mysql -u root wordpress < srcs/mysql/wp_users.sql
+#.sql has been generated, by adding users manually in wordpress, going to export phpmyadmin section and generating .sql file
 #kubectl exec allows to execute a command in a pod, "we grep the pod we want" and use -i to read the stdin, after -- the command to be executed in container is specified
 #-u is to specify the default user root, wordpress to specify the database, left redirection imports the .sql file to the database
+#grep the line that contains mysql, cut on space delimiter, take first field only (complete pod name)
+
 
 echo "========Users========"
 cat users.txt
