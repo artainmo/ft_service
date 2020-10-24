@@ -50,4 +50,4 @@ kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
 docker build -t grafana_img srcs/grafana
 kubectl create -f srcs/grafana/grafana.yaml
 
-kubectl exec -i $(kubectl get pods | grep mysql | cut -d ' ' -f 1) -- mysql -u root wordpress < srcs/mysql/wp_users.sql
+kubectl exec -i $(kubectl get pods | grep mysql | cut -d ' ' -f 1) -- mysql -u root wordpress < srcs/mysql/wordpress.sql

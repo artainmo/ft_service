@@ -1,4 +1,5 @@
+wordpress - artainmo : pass123
 phpmyadmin - artainmo : pass123
 grafana - artainmo : pass123
-ssh - artainmo@IP : pass123
-ftps - IP : artainmo : pass123 : 21
+ssh - ssh artainmo@192.168.99.130 : pass123
+ftps - 192.168.99.133 : artainmo : pass123 : 21

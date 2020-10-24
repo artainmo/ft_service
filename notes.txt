@@ -89,14 +89,8 @@ ftps -
 Telegraf -> influxdb -> grafana -
 
 TODO
-Phpmyadmin reverse proxy -> ssl? --
-
-
-Test container persistence --
--> mount and volume name has been changed! Storageclassname and  host path have been removed
--> volume creation error yaml
-Wordpress css js -> tried all from stackoveerflow and does not work.... / sometimes it randomly is correct
-
+Multiple users wordpress --
+Persistence pkill and remove pods --
 One IP? Loadbalancer should balance services over an IP range...
 - https://metallb.universe.tf/usage/ -> how to force multiple services on one IP
 - externalTrafficPolicy: local -> Use the host IP

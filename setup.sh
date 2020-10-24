@@ -7,8 +7,8 @@ HOMEBREW_NO_AUTO_UPDATE=1 brew install telegraf
 
 
 echo "========Minikube setup========"
-#export MINIKUBE_HOME=/Users/artainmo/goinfre #Minikube in goinfre no memory problem
-export MINIKUBE_HOME=/Users/arthurtainmont/goinfre
+export MINIKUBE_HOME=/Users/artainmo/goinfre #Minikube in goinfre no memory problem
+#export MINIKUBE_HOME=/Users/arthurtainmont/goinfre
 minikube start --vm-driver=virtualbox
 minikube status #Test if everything is working
 #Link your shell with minikube, so it has access to locally created images
@@ -63,7 +63,7 @@ kubectl create -f srcs/grafana/grafana.yaml
 
 
 #Import own .sql file to add users to mysql database, do it at end once mysql pod is already created
-kubectl exec -i $(kubectl get pods | grep mysql | cut -d ' ' -f 1) -- mysql -u root wordpress < srcs/mysql/wp_users.sql
+kubectl exec -i $(kubectl get pods | grep mysql | cut -d ' ' -f 1) -- mysql -u root wordpress < srcs/mysql/wordpress.sql
 #.sql has been generated, by adding users manually in wordpress, going to export phpmyadmin section and generating .sql file
 #kubectl exec allows to execute a command in a pod, "we grep the pod we want" and use -i to read the stdin, after -- the command to be executed in container is specified
 #-u is to specify the default user root, wordpress to specify the database, left redirection imports the .sql file to the database
