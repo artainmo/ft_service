@@ -2,4 +2,4 @@
 
 42 school [subject](https://cdn.intra.42.fr/pdf/pdf/53690/en.subject.pdf).
 
- Infrastructure setup of different services, with each having own unique container, via kubernetes to create a multi-service cluster.
+ Infrastructure setup of different services, with each having own unique container, via kubernetes to create a multi-service cluster
